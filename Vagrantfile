@@ -113,8 +113,8 @@ Vagrant.configure("2") do |config|
     grep -q -F 'LC_ALL=zh_CN.UTF-8' /etc/environment ||  echo 'LC_ALL=zh_CN.UTF-8' >> /etc/environment
     grep -q -F 'LANGUAGE=zh_CN.UTF-8' /etc/environment ||  echo 'LANGUAGE=zh_CN.UTF-8' >> /etc/environment
     # set HOST_IP environment
-    grep -q -F 'export HOST_IP=$(ifconfig enp0s8 | grep inet | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b" | head -1)' /etc/profile || \
-        echo 'export HOST_IP=$(ifconfig enp0s8 | grep inet | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b" | head -1)' >> /etc/profile
+    grep -q -F 'export HOST_IP=$(ifconfig enp0s8 | grep inet | grep -oE "\\b([0-9]{1,3}\\.){3}[0-9]{1,3}\\b" | head -1)' /etc/profile || \
+        echo 'export HOST_IP=$(ifconfig enp0s8 | grep inet | grep -oE "\\b([0-9]{1,3}\\.){3}[0-9]{1,3}\\b" | head -1)' >> /etc/profile
     # set timezone 
     TZ=Asia/Shanghai
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
@@ -175,8 +175,8 @@ Vagrant.configure("2") do |config|
     grep -q -F "HISTSIZE=1000" $USER_HOME/.bashrc || sed -i 's/^HISTSIZE=1000/HISTSIZE=100000/' $USER_HOME/.bashrc
     grep -q -F "HISTFILESIZE=2000" $USER_HOME/.bashrc || sed -i 's/^HISTFILESIZE=2000/HISTFILESIZE=200000/' $USER_HOME/.bashrc
     # set prefix sensitive command prompt
-    echo '"\e[A": history-search-backward' > $USER_HOME/.inputrc
-    echo '"\e[B": history-search-forward' >> $USER_HOME/.inputrc
+    echo '"\\e[A": history-search-backward' > $USER_HOME/.inputrc
+    echo '"\\e[B": history-search-forward' >> $USER_HOME/.inputrc
     chown vagrant: $USER_HOME/.inputrc
     # config vimrc
     echo 'filetype plugin indent on' > $USER_HOME/.vimrc
